@@ -6,6 +6,16 @@ from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
 from sklearn.svm import SVC
 
+st.set_page_config(
+    page_title="Iris Flower Detection",
+    page_icon="🌸",
+    initial_sidebar_state="expanded",
+    menu_items={
+        'Get Help': 'https://www.extremelycoolapp.com/help',
+        'Report a bug': "https://www.extremelycoolapp.com/bug",
+        'About': "# This is a header. This is an *extremely* cool app!"
+    }
+)
 # Load Iris dataset
 iris = load_iris()
 X = iris.data

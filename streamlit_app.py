@@ -7,10 +7,10 @@ from sklearn.svm import SVC
 
 
 st.title('Iris Flower Detection')
-sepal_length = st.slider("Sepal Length", 0, 2, 2)
-sepal_width = st.slider("Sepal Width", 0, 2, 2)
-petal_length = st.slider('Select a decimal value', min_value=0.0, max_value=1.0, step=0.1)
-petal_width = st.slider("Petal Width", 0, 2, 2)
+sepal_length = st.slider('Sepal Length', min_value=4.0, max_value=8.0, step=0.1)
+sepal_width = st.slider('Sepal Width', min_value=1.5, max_value=4.5, step=0.1)
+petal_length = st.slider('Petal Length', min_value=0.5, max_value=7.0, step=0.1)
+petal_width = st.slider('Petal Width', min_value=0.0, max_value=3.0, step=0.1)
 
 df = pd.DataFrame(load_iris().data, columns=load_iris().feature_names)
 df['target'] = load_iris().target

@@ -29,8 +29,19 @@ st.write(pd.DataFrame(X, columns=iris.feature_names).describe())
 # Pairplot
 st.subheader('Pairplot of Features:')
 pairplot_fig = px.scatter_matrix(pd.DataFrame(X, columns=iris.feature_names), dimensions=iris.feature_names, color=y,
-                                 title="Pairplot of Features")
+                                 title="Pairplot of Features", height=900, width=900)
 st.plotly_chart(pairplot_fig)
+# Code snippet for Pairplot
+st.subheader('Code Snippet for Pairplot:')
+st.code("""
+import plotly.express as px
+import pandas as pd
+from sklearn.datasets import load_iris
+
+iris = load_iris()
+pairplot_fig = px.scatter_matrix(pd.DataFrame(iris.data, columns=iris.feature_names), dimensions=iris.feature_names, color=iris.target)
+pairplot_fig.show()
+""", language='python')
 
 # Correlation Heatmap
 st.subheader('Correlation Heatmap:')
@@ -50,6 +61,28 @@ for i in range(len(corr_matrix)):
         )
 
 st.plotly_chart(fig)
+# Code snippet for Correlation Heatmap
+st.subheader('Code Snippet for Correlation Heatmap:')
+st.code("""
+import plotly.express as px
+import pandas as pd
+from sklearn.datasets import load_iris
+
+iris = load_iris()
+corr_matrix = pd.DataFrame(iris.data, columns=iris.feature_names).corr()
+fig = px.imshow(corr_matrix, x=iris.feature_names, y=iris.feature_names, color_continuous_scale='blues')
+for i in range(len(corr_matrix)):
+    for j in range(len(corr_matrix)):
+        fig.add_annotation(
+            x=iris.feature_names[i],
+            y=iris.feature_names[j],
+            text=str(round(corr_matrix.iloc[i, j], 2)),
+            showarrow=False,
+            font=dict(color='white' if abs(corr_matrix.iloc[i, j]) > 0.5 else 'black')
+        )
+
+fig.show()
+""", language='python')
 
 # Split data into training and testing sets
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
@@ -65,7 +98,7 @@ prediction = svm_classifier.predict(user_input)[0]
 # Display prediction
 st.header('Prediction')
 st.subheader('Predicted Iris Species:')
-st.write(iris.target_names[prediction])
+st.write(iris.target_names[prediction].capitalize())
 
 # Additional information
 st.write('---')
